@@ -84,12 +84,12 @@ export const DatabaseDetail = () => {
     },
   ];
 
-  if (flags.databaseScaleUp) {
-    tabs.push({
-      routeName: `/databases/${engine}/${id}/scale-up`,
-      title: 'Scale Up',
-    });
-  }
+  // if (flags.databaseScaleUp) {
+  tabs.push({
+    routeName: `/databases/${engine}/${id}/scale-up`,
+    title: 'Scale Up',
+  });
+  // }
 
   const getTabIndex = () => {
     const tabChoice = tabs.findIndex((tab) =>
@@ -164,11 +164,11 @@ export const DatabaseDetail = () => {
           <SafeTabPanel index={2}>
             <DatabaseSettings database={database} />
           </SafeTabPanel>
-          {flags.databaseScaleUp ? (
-            <SafeTabPanel index={3}>
-              <DatabaseScaleUp database={database} />
-            </SafeTabPanel>
-          ) : null}
+          {/* {flags.databaseScaleUp ? ( */}
+          <SafeTabPanel index={3}>
+            <DatabaseScaleUp database={database} />
+          </SafeTabPanel>
+          {/* ) : null} */}
         </TabPanels>
       </Tabs>
     </>

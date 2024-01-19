@@ -35,7 +35,7 @@ const GridBody = styled(Grid)(({ theme }) => ({
   backgroundColor: theme.bg.bgPaper,
   borderBottom: `1px solid ${theme.borderColors.borderTable}`,
   borderTop: `1px solid ${theme.borderColors.borderTable}`,
-  paddingBottom: theme.spacing(),
+  // paddingBottom: theme.spacing(),
   paddingRight: theme.spacing(),
 }));
 

@@ -1,7 +1,10 @@
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
 import { Link, useParams } from 'react-router-dom';
 
+import { Box } from 'src/components/Box';
 import { Paper } from 'src/components/Paper';
 import { TagsPanel } from 'src/components/TagsPanel/TagsPanel';
 import { Typography } from 'src/components/Typography';
@@ -53,7 +56,53 @@ export const SummaryPanel = () => {
           <StyledTitle data-qa-title variant="h3">
             NodeBalancer Details
           </StyledTitle>
-          <StyledSection>
+          <Card>
+            <CardContent sx={{ padding: 0 }}>
+              <Box display="flex" justifyContent="space-between">
+                <Typography style={{ wordBreak: 'break-word' }} variant="body1">
+                  {nodebalancer.hostname}
+                </Typography>
+              </Box>
+              <Box display="flex" marginTop={2}>
+                <Box marginRight={4}>
+                  <Typography color="text.secondary">Ports</Typography>
+                  <Typography component="div" variant="h5">
+                    {configPorts?.length === 0 && 'None'}
+                    {configPorts?.map(({ configId, port }, i) => (
+                      <React.Fragment key={configId}>
+                        <Link
+                          className="secondaryLink"
+                          to={`/nodebalancers/${nodebalancer?.id}/configurations/${configId}`}
+                        >
+                          {port}
+                        </Link>
+                        {i < configPorts?.length - 1 ? ', ' : ''}
+                      </React.Fragment>
+                    ))}
+                  </Typography>
+                </Box>
+                <Box marginRight={4}>
+                  <Typography color="text.secondary">Transferred</Typography>
+                  <Typography component="div" variant="h5">
+                    {convertMegabytesTo(nodebalancer.transfer.total)}
+                  </Typography>
+                </Box>
+                {/* <Box marginRight={4}>
+                  <Typography color="text.secondary">Storage</Typography>
+                  <Typography component="div" variant="h5">
+                    {gbStorage} GB
+                  </Typography>
+                </Box> */}
+              </Box>
+              <Typography color="text.secondary" marginTop={1}>
+                {`${up} up, ${down} down`}
+              </Typography>
+              <Typography color="text.secondary" marginTop={1}>
+                {region?.label}
+              </Typography>
+            </CardContent>
+          </Card>
+          {/* <StyledSection>
             <Typography data-qa-ports variant="body1">
               <strong>Ports: </strong>
               {configPorts?.length === 0 && 'None'}
@@ -69,30 +118,30 @@ export const SummaryPanel = () => {
                 </React.Fragment>
               ))}
             </Typography>
-          </StyledSection>
-          <StyledSection>
+          </StyledSection> */}
+          {/* <StyledSection>
             <Typography variant="body1">
               <strong>Backend Status: </strong>
               {`${up} up, ${down} down`}
             </Typography>
-          </StyledSection>
-          <StyledSection>
+          </StyledSection> */}
+          {/* <StyledSection>
             <Typography variant="body1">
               <strong>Transferred: </strong>
               {convertMegabytesTo(nodebalancer.transfer.total)}
             </Typography>
-          </StyledSection>
-          <StyledSection>
+          </StyledSection> */}
+          {/* <StyledSection>
             <Typography style={{ wordBreak: 'break-word' }} variant="body1">
               <strong>Host Name: </strong>
               {nodebalancer.hostname}
             </Typography>
-          </StyledSection>
-          <StyledSection>
+          </StyledSection> */}
+          {/* <StyledSection>
             <Typography data-qa-region variant="body1">
               <strong>Region:</strong> {region?.label}
             </Typography>
-          </StyledSection>
+          </StyledSection> */}
         </StyledSummarySection>
       </StyledSummarySectionWrapper>
       {displayFirewallLink && flags.firewallNodebalancer && (

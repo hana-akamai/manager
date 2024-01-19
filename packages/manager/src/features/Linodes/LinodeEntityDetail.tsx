@@ -91,6 +91,8 @@ export const LinodeEntityDetail = (props: Props) => {
           isVPCOnlyLinode={isVPCOnlyLinode}
           linodeId={linode.id}
           linodeLabel={linode.label}
+          linodePlan={linodePlan}
+          linodeRegionDisplay={linodeRegionDisplay}
           numCPUs={linode.specs.vcpus}
           numVolumes={numberOfVolumes}
           region={linode.region}

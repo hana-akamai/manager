@@ -1,4 +1,6 @@
 import { Database, DatabaseInstance } from '@linode/api-v4/lib/databases/types';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
 
@@ -7,6 +9,7 @@ import { CircleProgress } from 'src/components/CircleProgress';
 import { ErrorState } from 'src/components/ErrorState/ErrorState';
 import { StatusIcon } from 'src/components/StatusIcon/StatusIcon';
 import { TooltipIcon } from 'src/components/TooltipIcon';
+import { Typography } from 'src/components/Typography';
 import { useDatabaseTypesQuery } from 'src/queries/databases';
 import { useRegionsQuery } from 'src/queries/regions';
 import { formatStorageUnits } from 'src/utilities/formatStorageUnits';
@@ -81,7 +84,7 @@ export const DatabaseScaleUpCurrentConfiguration = ({ database }: Props) => {
         flex={1}
       >
         <Box key={'status-version'} paddingRight={6}>
-          <StyledSummaryTextBox>
+          {/* <StyledSummaryTextBox>
             <span style={{ fontFamily: theme.font.bold }}>Status</span>{' '}
             <StyledStatusSpan>
               <StatusIcon
@@ -90,17 +93,68 @@ export const DatabaseScaleUpCurrentConfiguration = ({ database }: Props) => {
               />
               {database.status}
             </StyledStatusSpan>
-          </StyledSummaryTextBox>
-          <StyledSummaryTextTypography>
+          </StyledSummaryTextBox> */}
+          {/* <StyledSummaryTextTypography>
             <span style={{ fontFamily: theme.font.bold }}>Version</span>{' '}
             {databaseEngineMap[database.engine]} v{database.version}
-          </StyledSummaryTextTypography>
-          <StyledSummaryTextTypography>
+          </StyledSummaryTextTypography> */}
+          {/* <StyledSummaryTextTypography>
             <span style={{ fontFamily: theme.font.bold }}>Nodes</span>{' '}
             {configuration}
-          </StyledSummaryTextTypography>
+          </StyledSummaryTextTypography> */}
         </Box>
-        <Box key={'region-plan'} paddingRight={6}>
+        <Card variant="outlined">
+          <CardContent>
+            <Box display="flex" justifyContent="space-between">
+              <Typography
+                color="text.secondary"
+                gutterBottom
+                sx={{ fontSize: 14 }}
+              >
+                {formatStorageUnits(type.label)}
+              </Typography>
+              <Box marginLeft={1}>
+                <StyledStatusSpan>
+                  <StatusIcon
+                    status={databaseStatusMap[database.status]}
+                    sx={{ verticalAlign: 'sub' }}
+                  />
+                  {database.status}
+                </StyledStatusSpan>
+              </Box>
+            </Box>
+            <Box display="flex" marginTop={2}>
+              <Box marginRight={4}>
+                <Typography color="text.secondary">RAM</Typography>
+                <Typography component="div" variant="h5">
+                  {type.memory / 1024} GB
+                </Typography>
+              </Box>
+              <Box marginRight={4}>
+                <Typography color="text.secondary">CPUs</Typography>
+                <Typography component="div" variant="h5">
+                  {type.vcpus}
+                </Typography>
+              </Box>
+              <Box>
+                <Typography color="text.secondary">Used Disk</Typography>
+                <Typography component="div" variant="h5">
+                  {database.used_disk_size_gb} / {database.total_disk_size_gb}{' '}
+                  GB
+                </Typography>
+              </Box>
+            </Box>
+
+            <Typography color="text.secondary" marginTop={1}>
+              {configuration}
+            </Typography>
+            <Typography color="text.secondary" marginTop={1}>
+              {databaseEngineMap[database.engine]} v{database.version} |{' '}
+              {region?.label ?? database.region}
+            </Typography>
+          </CardContent>
+        </Card>
+        {/* <Box key={'region-plan'} paddingRight={6}>
           <StyledSummaryTextTypography>
             <span style={{ fontFamily: theme.font.bold }}>Region</span>{' '}
             {region?.label ?? database.region}
@@ -109,8 +163,8 @@ export const DatabaseScaleUpCurrentConfiguration = ({ database }: Props) => {
             <span style={{ fontFamily: theme.font.bold }}>Plan</span>{' '}
             {formatStorageUnits(type.label)}
           </StyledSummaryTextTypography>
-        </Box>
-
+        </Box> */}
+        {/*
         <Box key={'ram-cpu'} paddingRight={6}>
           <StyledSummaryTextTypography>
             <span style={{ fontFamily: theme.font.bold }}>RAM</span>{' '}
@@ -120,8 +174,8 @@ export const DatabaseScaleUpCurrentConfiguration = ({ database }: Props) => {
             <span style={{ fontFamily: theme.font.bold }}>CPUs</span>{' '}
             {type.vcpus}
           </StyledSummaryTextTypography>
-        </Box>
-        <Box key={'disk'} paddingRight={6}>
+        </Box> */}
+        {/* <Box key={'disk'} paddingRight={6}>
           {database.total_disk_size_gb ? (
             <>
               <StyledSummaryTextTypography>
@@ -146,7 +200,7 @@ export const DatabaseScaleUpCurrentConfiguration = ({ database }: Props) => {
               {convertMegabytesTo(type.disk, true)}
             </StyledSummaryTextTypography>
           )}
-        </Box>
+        </Box> */}
       </StyledSummaryBox>
     </>
   );

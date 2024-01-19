@@ -1,5 +1,6 @@
 import Grid from '@mui/material/Unstable_Grid2';
 import { useTheme } from '@mui/material/styles';
+import { DateTime } from 'luxon';
 import { useSnackbar } from 'notistack';
 import * as React from 'react';
 
@@ -103,7 +104,7 @@ export const LinodeEntityDetailFooter = React.memo((props: FooterProps) => {
         lg={8}
         xs={12}
       >
-        <StyledBox>
+        {/* <StyledBox>
           {linodePlan && (
             <StyledListItem
               sx={{
@@ -123,21 +124,24 @@ export const LinodeEntityDetailFooter = React.memo((props: FooterProps) => {
               {linodeRegionDisplay}
             </StyledListItem>
           )}
-        </StyledBox>
+        </StyledBox> */}
         <StyledBox>
-          <StyledListItem sx={{ ...sxListItemFirstChild }}>
+          {/* <StyledListItem sx={{ ...sxListItemFirstChild }}>
             <StyledLabelBox component="span">Linode ID:</StyledLabelBox>{' '}
             {linodeId}
-          </StyledListItem>
+          </StyledListItem> */}
           <StyledListItem
             sx={{
               ...sxLastListItem,
             }}
           >
-            <StyledLabelBox component="span">Created:</StyledLabelBox>{' '}
-            {formatDate(linodeCreated, {
+            Created on{' '}
+            {DateTime.fromISO(linodeCreated, {
+              zone: profile?.timezone,
+            }).toLocaleString(DateTime.DATE_MED)}
+            {/* {formatDate(linodeCreated, {
               timezone: profile?.timezone,
-            })}
+            })} */}
           </StyledListItem>
         </StyledBox>
       </Grid>

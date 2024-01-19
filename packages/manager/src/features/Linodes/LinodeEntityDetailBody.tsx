@@ -1,10 +1,13 @@
 import { VPC } from '@linode/api-v4/lib';
 import { useMediaQuery } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Unstable_Grid2';
 import { useTheme } from '@mui/material/styles';
 import * as React from 'react';
 import { HashLink } from 'react-router-hash-link';
 
+import { Box } from 'src/components/Box';
 import { Link } from 'src/components/Link';
 import { Typography, TypographyProps } from 'src/components/Typography';
 import { AccessTable } from 'src/features/Linodes/AccessTable';
@@ -49,6 +52,8 @@ export interface BodyProps {
   isVPCOnlyLinode: boolean;
   linodeId: number;
   linodeLabel: string;
+  linodePlan: null | string;
+  linodeRegionDisplay: null | string;
   numCPUs: number;
   numVolumes: number;
   region: string;
@@ -66,6 +71,8 @@ export const LinodeEntityDetailBody = React.memo((props: BodyProps) => {
     isVPCOnlyLinode,
     linodeId,
     linodeLabel,
+    linodePlan,
+    linodeRegionDisplay,
     numCPUs,
     numVolumes,
     region,
@@ -97,15 +104,58 @@ export const LinodeEntityDetailBody = React.memo((props: BodyProps) => {
         <Grid
           container
           flexDirection={matchesLgUp ? 'row' : 'column'}
-          sm={3}
+          padding={0}
+          sm={4}
           spacing={0}
           xs={12}
         >
-          <StyledColumnLabelGrid mb={matchesLgUp ? 0 : 2} xs={12}>
+          {/* <StyledColumnLabelGrid mb={matchesLgUp ? 0 : 2} xs={12}>
             Summary
-          </StyledColumnLabelGrid>
+          </StyledColumnLabelGrid> */}
           <StyledSummaryGrid container spacing={1}>
-            <Grid alignItems="center" display="flex" lg={6} sm={12} xs={6}>
+            <Card>
+              <CardContent sx={{ paddingBottom: '16px !important' }}>
+                <Box display="flex" justifyContent="space-between">
+                  <Typography
+                    color="text.secondary"
+                    gutterBottom
+                    sx={{ fontSize: 14 }}
+                  >
+                    {linodePlan}
+                  </Typography>
+                </Box>
+                <Box display="flex" marginTop={2}>
+                  <Box marginRight={4}>
+                    <Typography color="text.secondary">RAM</Typography>
+                    <Typography component="div" variant="h5">
+                      {gbRAM} GB
+                    </Typography>
+                  </Box>
+                  <Box marginRight={4}>
+                    <Typography color="text.secondary">CPUs</Typography>
+                    <Typography component="div" variant="h5">
+                      {numCPUs}
+                    </Typography>
+                  </Box>
+                  <Box marginRight={4}>
+                    <Typography color="text.secondary">Storage</Typography>
+                    <Typography component="div" variant="h5">
+                      {gbStorage} GB
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Typography color="text.secondary">Volumes</Typography>
+                    <Typography component="div" variant="h5">
+                      {numVolumes}
+                    </Typography>
+                  </Box>
+                </Box>
+                <Typography color="text.secondary" marginTop={2}>
+                  {linodeRegionDisplay}
+                </Typography>
+              </CardContent>
+            </Card>
+            {/* <Grid alignItems="center" display="flex" lg={6} sm={12} xs={6}>
               <Typography>
                 {pluralize('CPU Core', 'CPU Cores', numCPUs)}
               </Typography>
@@ -120,10 +170,10 @@ export const LinodeEntityDetailBody = React.memo((props: BodyProps) => {
               <Typography>
                 {pluralize('Volume', 'Volumes', numVolumes)}
               </Typography>
-            </Grid>
+            </Grid> */}
           </StyledSummaryGrid>
         </Grid>
-        <Grid container sm={9} xs={12}>
+        <Grid container sm={8} xs={12}>
           <Grid container xs={12}>
             <AccessTable
               footer={

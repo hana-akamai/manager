@@ -22,9 +22,9 @@ export const StyledActionButton = styled(Button, {
 export const StyledDescriptionBox = styled(Box, {
   label: 'StyledDescriptionBox',
 })(({ theme }) => ({
+  flexDirection: 'column',
   [theme.breakpoints.down('lg')]: {
     display: 'flex',
-    flexDirection: 'column',
     paddingTop: theme.spacing(3),
   },
   [theme.breakpoints.down('sm')]: {

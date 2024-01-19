@@ -132,7 +132,7 @@ export const KubeConfigDisplay = (props: Props) => {
     <>
       <Grid xs={12}>
         <Typography className={classes.label}>
-          Kubernetes API Endpoint:
+          Kubernetes API Endpoint
         </Typography>
         <Typography>
           {renderEndpoint(
@@ -146,7 +146,7 @@ export const KubeConfigDisplay = (props: Props) => {
       </Grid>
       <Grid xs={12}>
         <Typography className={classes.label} style={{ marginTop: 8 }}>
-          Kubeconfig:
+          Kubeconfig
         </Typography>
         <div className={classes.kubeconfigElements}>
           <Box

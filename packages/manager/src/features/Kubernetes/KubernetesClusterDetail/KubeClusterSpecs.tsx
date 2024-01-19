@@ -1,9 +1,12 @@
 import { KubernetesCluster } from '@linode/api-v4';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Theme } from '@mui/material/styles';
-import { makeStyles } from 'tss-react/mui';
 import * as React from 'react';
+import { makeStyles } from 'tss-react/mui';
 
+import { Box } from 'src/components/Box';
 import { Typography } from 'src/components/Typography';
 import { useAllKubernetesNodePoolQuery } from 'src/queries/kubernetes';
 import { useRegionsQuery } from 'src/queries/regions';
@@ -111,8 +114,54 @@ export const KubeClusterSpecs = (props: Props) => {
 
   return (
     <Grid container direction="row" lg={3} spacing={0} xs={12}>
-      <Grid lg={6}>{kubeSpecsLeft.map(kubeSpecItem)}</Grid>
-      <Grid lg={6}>{kubeSpecsRight.map(kubeSpecItem)}</Grid>
+      <Card>
+        <CardContent>
+          <Box display="flex" justifyContent="space-between">
+            <Typography
+              color="text.secondary"
+              gutterBottom
+              sx={{ fontSize: 14 }}
+            >
+              Version {cluster.k8s_version}
+            </Typography>
+          </Box>
+          <Box display="flex" marginTop={2}>
+            <Box marginRight={4}>
+              <Typography color="text.secondary">RAM</Typography>
+              <Typography component="div" variant="h5">
+                {RAM / 1024} GB
+              </Typography>
+            </Box>
+            <Box marginRight={4}>
+              <Typography color="text.secondary">CPUs</Typography>
+              <Typography component="div" variant="h5">
+                {CPU}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography color="text.secondary">Storage</Typography>
+              <Typography component="div" variant="h5">
+                {Math.floor(Storage / 1024)} GB
+              </Typography>
+            </Box>
+          </Box>
+          <Typography color="text.secondary" marginTop={2}>
+            {displayRegion}
+          </Typography>
+          <Typography color="text.secondary" marginTop={1}>
+            $
+            {getTotalClusterPrice({
+              highAvailabilityPrice,
+              pools: pools ?? [],
+              region: region?.id,
+              types: types ?? [],
+            }).toFixed(2)}
+            /month
+          </Typography>
+        </CardContent>
+      </Card>
+      {/* <Grid lg={6}>{kubeSpecsLeft.map(kubeSpecItem)}</Grid>
+      <Grid lg={6}>{kubeSpecsRight.map(kubeSpecItem)}</Grid> */}
     </Grid>
   );
 };

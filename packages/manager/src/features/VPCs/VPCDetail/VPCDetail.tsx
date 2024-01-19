@@ -1,5 +1,8 @@
 import { Typography } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import { useTheme } from '@mui/material/styles';
+import { DateTime } from 'luxon';
 import * as React from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -16,6 +19,7 @@ import {
   VPC_FEEDBACK_FORM_URL,
   VPC_LABEL,
 } from 'src/features/VPCs/constants';
+import { useProfile } from 'src/queries/profile';
 import { useRegionsQuery } from 'src/queries/regions';
 import { useVPCQuery } from 'src/queries/vpcs';
 import { truncate } from 'src/utilities/truncate';
@@ -39,6 +43,7 @@ const VPCDetail = () => {
 
   const { data: vpc, error, isLoading } = useVPCQuery(+vpcId);
   const { data: regions } = useRegionsQuery();
+  const { data: profile } = useProfile();
 
   const [editVPCDrawerOpen, setEditVPCDrawerOpen] = React.useState(false);
   const [deleteVPCDialogOpen, setDeleteVPCDialogOpen] = React.useState(false);
@@ -88,12 +93,16 @@ const VPCDetail = () => {
     [
       {
         label: 'Created',
-        value: vpc.created,
+        value: DateTime.fromISO(vpc.created, {
+          zone: profile?.timezone,
+        }).toLocaleString(DateTime.DATE_MED),
       },
 
       {
         label: 'Updated',
-        value: vpc.updated,
+        value: DateTime.fromISO(vpc.updated, {
+          zone: profile?.timezone,
+        }).toLocaleString(DateTime.DATE_MED),
       },
     ],
   ];
@@ -140,43 +149,96 @@ const VPCDetail = () => {
       </EntityHeader>
       <StyledPaper>
         <StyledSummaryBox data-qa-vpc-summary display="flex" flex={1}>
-          {summaryData.map((col) => {
+          <Card>
+            <CardContent sx={{ padding: '0 !important' }}>
+              <Box display="flex">
+                <Box marginRight={4}>
+                  <Typography color="text.secondary">Subnets</Typography>
+                  <Typography component="div" variant="h5">
+                    {vpc.subnets.length}
+                  </Typography>
+                </Box>
+                <Box marginRight={4}>
+                  <Typography color="text.secondary">Linodes</Typography>
+                  <Typography component="div" variant="h5">
+                    {numLinodes}
+                  </Typography>
+                </Box>
+              </Box>
+              <Box display="flex" marginTop={1}>
+                <Typography
+                  color="text.secondary"
+                  gutterBottom
+                  sx={{ fontSize: 14 }}
+                >
+                  {regionLabel}
+                </Typography>
+              </Box>
+              <Typography color="text.secondary" marginTop={1}>
+                Created on{' '}
+                {DateTime.fromISO(vpc.created, {
+                  zone: profile?.timezone,
+                }).toLocaleString(DateTime.DATE_MED)}
+              </Typography>
+              <Typography color="text.secondary">
+                Updated on{' '}
+                {DateTime.fromISO(vpc.updated, {
+                  zone: profile?.timezone,
+                }).toLocaleString(DateTime.DATE_MED)}
+              </Typography>
+            </CardContent>
+          </Card>
+          {/* {summaryData.map((col) => {
             return (
               <Box key={col[0].label} paddingRight={6}>
-                <StyledSummaryTextTypography>
-                  <span style={{ fontFamily: theme.font.bold }}>
-                    {col[0].label}
-                  </span>{' '}
-                  {col[0].value}
-                </StyledSummaryTextTypography>
-                <StyledSummaryTextTypography>
-                  <span style={{ fontFamily: theme.font.bold }}>
-                    {col[1].label}
-                  </span>{' '}
-                  {col[1].value}
-                </StyledSummaryTextTypography>
+                <Box marginBottom={1}>
+                  <Typography>
+                    <strong>{col[0].label}</strong>{' '}
+                  </Typography>
+                  <Typography sx={{ fontSize: '1rem', padding: 1 }}>
+                    {col[0].value}
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography>
+                    <strong>{col[1].label}</strong>{' '}
+                  </Typography>
+                  <Typography sx={{ fontSize: '1rem', padding: 1 }}>
+                    {col[1].value}
+                  </Typography>
+                </Box>
               </Box>
             );
-          })}
+          })} */}
         </StyledSummaryBox>
         {vpc.description.length > 0 && (
           <StyledDescriptionBox display="flex" flex={1}>
-            <Typography>
-              <span style={{ fontFamily: theme.font.bold, paddingRight: 8 }}>
-                Description
-              </span>{' '}
-            </Typography>
-            <Typography sx={{ overflowWrap: 'anywhere', wordBreak: 'normal' }}>
-              {description}{' '}
-              {description.length > 150 && (
-                <StyledLinkButton
-                  onClick={() => setShowFullDescription((show) => !show)}
-                  sx={{ fontSize: '0.875rem' }}
-                >
-                  Read {showFullDescription ? 'Less' : 'More'}
-                </StyledLinkButton>
-              )}
-            </Typography>
+            <Box>
+              <Typography>
+                <span style={{ fontFamily: theme.font.bold, paddingRight: 8 }}>
+                  Description
+                </span>{' '}
+              </Typography>
+            </Box>
+            <Box>
+              <Typography
+                sx={{
+                  fontSize: '1rem',
+                  overflowWrap: 'anywhere',
+                  wordBreak: 'normal',
+                }}
+              >
+                {description}{' '}
+                {description.length > 150 && (
+                  <StyledLinkButton
+                    onClick={() => setShowFullDescription((show) => !show)}
+                    sx={{ fontSize: '0.875rem' }}
+                  >
+                    Read {showFullDescription ? 'Less' : 'More'}
+                  </StyledLinkButton>
+                )}
+              </Typography>
+            </Box>
           </StyledDescriptionBox>
         )}
       </StyledPaper>
