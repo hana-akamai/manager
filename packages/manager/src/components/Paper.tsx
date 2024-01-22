@@ -40,6 +40,7 @@ const StyledPaper = styled(_Paper, {
   shouldForwardProp: omittedProps(['error']),
 })<Props>(({ theme, ...props }) => ({
   borderColor: props.error ? theme.color.red : undefined,
+  borderRadius: theme.spacing(),
   padding: theme.spacing(3),
   paddingTop: 17,
 }));

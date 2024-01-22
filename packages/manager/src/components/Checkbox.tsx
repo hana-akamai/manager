@@ -88,6 +88,7 @@ const StyledCheckbox = styled(_Checkbox)(({ theme, ...props }) => ({
   '&:hover': {
     color: theme.palette.primary.main,
   },
+  borderRadius: 4,
   color: '#ccc',
   transition: theme.transitions.create(['color']),
   ...(props.checked && {

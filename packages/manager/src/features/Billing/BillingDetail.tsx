@@ -92,6 +92,7 @@ export const BillingDetail = () => {
 };
 
 export const BillingPaper = styled(Paper)(() => ({
+  borderRadius: 4,
   height: '100%',
   padding: `15px 20px`,
 }));

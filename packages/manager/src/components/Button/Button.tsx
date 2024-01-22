@@ -53,6 +53,7 @@ const StyledButton = styled(_Button, {
     'buttonType',
   ]),
 })<ButtonProps>(({ theme, ...props }) => ({
+  borderRadius: 4,
   ...(props.buttonType === 'secondary' && {
     color: theme.textColors.linkActiveLight,
   }),

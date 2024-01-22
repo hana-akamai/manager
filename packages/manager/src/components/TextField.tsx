@@ -25,6 +25,7 @@ const useStyles = makeStyles()((theme: Theme) => ({
   },
   bg: {
     background: theme.bg.app,
+    borderRadius: 4,
   },
   editable: {
     paddingLeft: 1,

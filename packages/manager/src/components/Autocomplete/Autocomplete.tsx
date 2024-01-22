@@ -184,6 +184,7 @@ export const Autocomplete = <
 const useStyles = makeStyles()((theme: Theme) => ({
   bg: {
     background: theme.bg.app,
+    borderRadius: 4,
     paddingLeft: theme.spacing(),
   },
 }));
