@@ -387,9 +387,10 @@ const LinodeSummary: React.FC<Props> = (props) => {
   );
 };
 
-const StyledSelect = styled(Select, { label: 'StyledSelect' })({
+const StyledSelect = styled(Select, { label: 'StyledSelect' })(({ theme }) => ({
+  background: theme.bg.white,
   maxWidth: 150,
-});
+}));
 
 const StyledGrid = styled(Grid, {
   label: 'StyledGrid',

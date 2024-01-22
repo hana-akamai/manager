@@ -115,13 +115,19 @@ export const LinodeEntityDetailBody = React.memo((props: BodyProps) => {
           <StyledSummaryGrid container spacing={1}>
             <Card>
               <CardContent sx={{ paddingBottom: '16px !important' }}>
-                <Box display="flex" justifyContent="space-between">
+                <Box display="flex">
                   <Typography
                     color="text.secondary"
                     gutterBottom
                     sx={{ fontSize: 14 }}
                   >
-                    {linodePlan}
+                    {linodePlan}{' '}
+                    <span style={{ fontSize: 12, margin: 4, marginRight: 6 }}>
+                      |
+                    </span>{' '}
+                  </Typography>
+                  <Typography color="text.secondary">
+                    {linodeRegionDisplay}
                   </Typography>
                 </Box>
                 <Box display="flex" marginTop={2}>
@@ -150,9 +156,6 @@ export const LinodeEntityDetailBody = React.memo((props: BodyProps) => {
                     </Typography>
                   </Box>
                 </Box>
-                <Typography color="text.secondary" marginTop={2}>
-                  {linodeRegionDisplay}
-                </Typography>
               </CardContent>
             </Card>
             {/* <Grid alignItems="center" display="flex" lg={6} sm={12} xs={6}>

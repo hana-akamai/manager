@@ -164,7 +164,6 @@ export const BillingSummary = (props: BillingSummaryProps) => {
         <Grid {...gridDimensions} sm={6}>
           <BillingPaper variant="outlined">
             <Typography variant="h3">Account Balance</Typography>
-            <Divider />
             <Box
               alignItems="center"
               display="flex"
@@ -209,8 +208,6 @@ export const BillingSummary = (props: BillingSummaryProps) => {
           <Grid md={4} sm={6} xs={12}>
             <BillingPaper variant="outlined">
               <Typography variant="h3">Promotions</Typography>
-
-              <Divider />
               <div style={{ maxHeight: 300, overflowY: 'auto' }}>
                 {promotions?.map((promo) => (
                   <PromoDisplay
@@ -232,7 +229,6 @@ export const BillingSummary = (props: BillingSummaryProps) => {
                 text={accruedChargesHelperText}
               />
             </Box>
-            <Divider />
             <Box
               alignItems="center"
               display="flex"
