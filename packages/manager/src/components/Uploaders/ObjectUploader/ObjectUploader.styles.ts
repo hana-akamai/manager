@@ -62,7 +62,7 @@ export const useStyles = makeStyles<void, 'uploadButton'>()(
     dropzone: {
       backgroundColor: 'transparent',
       borderColor: theme.palette.primary.main,
-      borderRadius: 6,
+      borderRadius: 8,
       borderStyle: 'dashed',
       borderWidth: 1,
       color: theme.palette.primary.main,

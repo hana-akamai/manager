@@ -20,8 +20,9 @@ export const StyledDropZoneDiv = styled('div', {
     'isDragReject',
   ]),
 })<DropZoneClassProps>(({ theme, ...props }) => ({
-  backgroundColor: 'transparent',
+  backgroundColor: theme.borderColors.borderTable,
   borderColor: theme.palette.primary.main,
+  borderRadius: 8,
   borderStyle: 'dashed',
   borderWidth: 1,
   color: theme.palette.primary.main,

@@ -23,6 +23,9 @@ const useStyles = makeStyles()((theme: Theme) => ({
   absolute: {
     position: 'absolute',
   },
+  bg: {
+    background: theme.bg.app,
+  },
   editable: {
     paddingLeft: 1,
     wordBreak: 'keep-all',
@@ -422,6 +425,7 @@ export const TextField = (props: TextFieldProps) => {
             className: cx(
               'input',
               {
+                [classes.bg]: true,
                 [classes.expand]: expand,
               },
               className

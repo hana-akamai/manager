@@ -1,7 +1,9 @@
 import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MuiAutocomplete from '@mui/material/Autocomplete';
+import { Theme } from '@mui/material/styles';
 import React from 'react';
+import { makeStyles } from 'tss-react/mui';
 
 import { Box } from 'src/components/Box';
 import { TextField, TextFieldProps } from 'src/components/TextField';
@@ -86,6 +88,8 @@ export const Autocomplete = <
     ...rest
   } = props;
 
+  const { classes } = useStyles();
+
   const isSelectAllActive =
     multiple && Array.isArray(value) && value.length === options.length;
 
@@ -112,6 +116,7 @@ export const Autocomplete = <
           InputProps={{
             ...params.InputProps,
             ...textFieldProps?.InputProps,
+            className: classes.bg,
           }}
         />
       )}
@@ -175,3 +180,10 @@ export const Autocomplete = <
     />
   );
 };
+
+const useStyles = makeStyles()((theme: Theme) => ({
+  bg: {
+    background: theme.bg.app,
+    paddingLeft: theme.spacing(),
+  },
+}));

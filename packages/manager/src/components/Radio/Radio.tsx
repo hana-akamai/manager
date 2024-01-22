@@ -1,5 +1,6 @@
 import { default as _Radio, RadioProps } from '@mui/material/Radio';
 import * as React from 'react';
+import { Theme, styled } from '@mui/material/styles';
 
 import RadioIcon from '../../assets/icons/radio.svg';
 import RadioIconRadioed from '../../assets/icons/radioRadioed.svg';
@@ -24,7 +25,7 @@ import RadioIconRadioed from '../../assets/icons/radioRadioed.svg';
  */
 export const Radio = (props: RadioProps) => {
   return (
-    <_Radio
+    <StyledRadio
       checkedIcon={<RadioIconRadioed />}
       data-qa-radio={props.checked || false}
       icon={<RadioIcon />}
@@ -38,5 +39,17 @@ export const Radio = (props: RadioProps) => {
     />
   );
 };
+
+const StyledRadio = styled(_Radio)(({ theme }) => ({
+  '& .defaultFill': {
+    fill: `${theme.bg.app} !important`,
+    transition: theme.transitions.create(['fill']),
+  },
+  '&:hover': {
+    color: theme.palette.primary.main,
+  },
+  color: '#ccc',
+  transition: theme.transitions.create(['color']),
+}));
 
 export type { RadioProps };

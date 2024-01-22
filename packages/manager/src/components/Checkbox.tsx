@@ -5,8 +5,8 @@ import * as React from 'react';
 
 import CheckboxIcon from 'src/assets/icons/checkbox.svg';
 import CheckboxCheckedIcon from 'src/assets/icons/checkboxChecked.svg';
-import { TooltipIcon } from 'src/components/TooltipIcon';
 import { FormControlLabel } from 'src/components/FormControlLabel';
+import { TooltipIcon } from 'src/components/TooltipIcon';
 
 interface Props extends CheckboxProps {
   /**
@@ -51,7 +51,7 @@ export const Checkbox = (props: Props) => {
       checkedIcon={<CheckboxCheckedIcon />}
       color="primary"
       data-qa-checked={props.checked}
-      icon={<CheckboxIcon />}
+      icon={<CheckboxIcon style={{ fill: 'red' }} />}
       {...rest}
     />
   );
@@ -82,6 +82,7 @@ export const Checkbox = (props: Props) => {
 
 const StyledCheckbox = styled(_Checkbox)(({ theme, ...props }) => ({
   '& .defaultFill': {
+    fill: theme.bg.app,
     transition: theme.transitions.create(['fill']),
   },
   '&:hover': {
@@ -94,7 +95,7 @@ const StyledCheckbox = styled(_Checkbox)(({ theme, ...props }) => ({
   }),
   ...(props.disabled && {
     '& .defaultFill': {
-      fill: `${theme.bg.main}`,
+      // fill: `${theme.bg.main}`,
       opacity: 0.5,
     },
     color: '#ccc !important',
